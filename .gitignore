@@ -1,0 +1,7 @@
+*.class
+*.jar
+*.MF
+*.project
+*.tern-project
+*.classpath
+*.prefs

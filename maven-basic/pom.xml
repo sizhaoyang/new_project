@@ -1,0 +1,335 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.jaovo.common</groupId>
+	<artifactId>maven-basic</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>maven-basic</name>
+	<url>http://maven.apache.org</url>
+
+	<!-- maven 主要功能 包含三部分 : 1 包依赖 2 项目生命周期统一管理 3 项目内模块统一管理 项目模块之间的关系 : 继承 依赖 
+		聚合 继承 : 继承的目的 : 是为了公司内部或者是同一个项目中,有统一的依赖关系,降低包冲突,,避免导入重复的包 1 除了父项目中的pom.xml文件,别的全部删除,,management 
+		2 继承是子项目中,通过<parent>标签,来继承父模块中的所有依赖关系和所有的配置 继承了以后,子模块中的groupId和父模块属性相同的[配置,都可以不要,同时版本也可以不要 
+		<groupId>${project.groupId}</groupId>,这个变量表示的是当前pom.xml文件中表示的那个groupId 聚合 
+		: 聚合的目的 : 对项目中所有的模块进行统一的生命周期管理,进行统一的编译,测试,安装.部署.就不用一个个模块来了 在父模块中<module> -->
+
+	<!-- 聚合 -->
+	<modules>
+		<module>../common-hibernate</module>
+		<module>../cms-data</module>
+	</modules>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<spring.version>4.2.6.RELEASE</spring.version>
+		<hibernate.version>4.2.21.Final</hibernate.version>
+	</properties>
+
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- 自己公司的包 -->
+			<dependency>
+				<groupId>com.jaovo.common</groupId>
+				<artifactId>common-hibernate</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+
+			<!-- <dependency> -->
+			<!-- <groupId>${project.groupId}</groupId> -->
+			<!-- <artifactId>common-util</artifactId> -->
+			<!-- <version>0.0.1-SNAPSHOT</version> -->
+			<!-- </dependency> -->
+			<!-- 项目内的包 -->
+			<dependency>
+				<groupId>com.jaovo.cms</groupId>
+				<artifactId>cms-data</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<!-- <dependency> -->
+			<!-- <groupId>com.jaovo.cms</groupId> -->
+			<!-- <artifactId>cms-user</artifactId> -->
+			<!-- <version>0.0.1-SNAPSHOT</version> -->
+			<!-- </dependency> -->
+			<!-- <dependency> -->
+			<!-- <groupId>com.jaovo.cms</groupId> -->
+			<!-- <artifactId>cms-web</artifactId> -->
+			<!-- <version>${project.version}</version> -->
+			<!-- </dependency> -->
+
+			<!-- 测试相关的 -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.12</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.dbunit</groupId>
+				<artifactId>dbunit</artifactId>
+				<version>2.5.2</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.easymock</groupId>
+				<artifactId>easymock</artifactId>
+				<version>3.4</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>${spring.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<!-- 数据层 -->
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-core</artifactId>
+				<version>${hibernate.version}</version>
+			</dependency>
+
+			<!-- Spring -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-tx</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-expression</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-orm</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jdbc</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<!-- spring 结束 -->
+			<!-- AOP动态代理相关 -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aop</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjrt</artifactId>
+				<version>1.8.9</version>
+			</dependency>
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjweaver</artifactId>
+				<version>1.8.9</version>
+			</dependency>
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjtools</artifactId>
+				<version>1.8.9</version>
+			</dependency>
+			<!-- 日志相关 -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>1.7.15</version>
+			</dependency>
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>1.2.17</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>1.10</version>
+			</dependency>
+			<!-- Spring记录日志 -->
+			<dependency>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+				<version>1.2</version>
+			</dependency>
+			<!-- Hibernate记录日志 -->
+			<dependency>
+				<groupId>org.jboss.logging</groupId>
+				<artifactId>jboss-logging</artifactId>
+				<version>3.3.0.Final</version>
+			</dependency>
+			<!-- 日志相关结束 -->
+
+			<!-- 数据库相关 -->
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>5.1.39</version>
+			</dependency>
+			<dependency>
+				<groupId>com.oracle</groupId>
+				<artifactId>ojdbc7</artifactId>
+				<version>12.1.0.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-dbcp2</artifactId>
+				<version>2.1.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-pool2</artifactId>
+				<version>2.4.2</version>
+			</dependency>
+			<dependency>
+				<groupId>com.mchange</groupId>
+				<artifactId>c3p0</artifactId>
+				<version>0.9.5.2</version>
+			</dependency>
+			<!-- apache commons -->
+			<dependency>
+				<groupId>commons-fileupload</groupId>
+				<artifactId>commons-fileupload</artifactId>
+				<version>1.3.1</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>2.5</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-collections</groupId>
+				<artifactId>commons-collections</artifactId>
+				<version>3.2.2</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>2.6</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-beanutils</groupId>
+				<artifactId>commons-beanutils</artifactId>
+				<version>1.9.2</version>
+			</dependency>
+			<!-- java WEB -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>3.1.0</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet.jsp</groupId>
+				<artifactId>javax.servlet.jsp-api</artifactId>
+				<version>2.3.2-b02</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet.jsp.jstl</groupId>
+				<artifactId>javax.servlet.jsp.jstl-api</artifactId>
+				<version>1.2.1</version>
+			</dependency>
+			<dependency>
+				<groupId>taglibs</groupId>
+				<artifactId>standard</artifactId>
+				<version>1.1.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.freemarker</groupId>
+				<artifactId>freemarker</artifactId>
+				<version>2.3.23</version>
+			</dependency>
+
+			<!-- 分页 -->
+			<dependency>
+				<groupId>jsptags</groupId>
+				<artifactId>pager-taglib</artifactId>
+				<version>2.0</version>
+			</dependency>
+			<!-- JSR330 inject依赖注入注解支持 -->
+			<dependency>
+				<groupId>javax.inject</groupId>
+				<artifactId>javax.inject</artifactId>
+				<version>1</version>
+			</dependency>
+
+			<!-- 客户端数据提交验证,jsr303 -->
+			<dependency>
+				<groupId>javax.validation</groupId>
+				<artifactId>validation-api</artifactId>
+				<version>1.1.0.Final</version>
+			</dependency>
+			<!-- 只能使5.1,hibernate扩展的验证 -->
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>5.0.1.Final</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+
+
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.3.2</version>
+					<configuration>
+						<!-- 源代码的java版本 -->
+						<source>1.8</source>
+						<!-- 编译后生成class文件java版本 -->
+						<target>1.8</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-maven-plugin</artifactId>
+					<version>9.3.11.v20160721</version>
+					<configuration>
+						<!-- -->
+						<scanIntervalSeconds>10</scanIntervalSeconds>
+						<webApp>
+							<contextPath>/cms</contextPath>
+						</webApp>
+						<stopKey>shutdown</stopKey>
+						<stopPort>9998</stopPort>
+						<connectors>
+							<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+								<port>8008</port>
+								<maxIdleTime>60000</maxIdleTime>
+							</connector>
+						</connectors>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+	</build>
+</project>

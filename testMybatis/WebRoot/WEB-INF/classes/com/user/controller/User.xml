@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<!-- struts2文件头 -->
+	<struts>
+	<package name="user" namespace="/user" extends="struts-default">
+      
+        <action name="user_*"  class="com.user.controller.UserController"   method="{1}" >
+            <result  type="chain">
+               list
+            </result>
+            <result  name="error">
+             /user_error.jsp
+            </result>
+        </action>
+        <action  name="add"  >
+           <result  >
+             /user_add.jsp
+           </result>
+        </action>
+      
+         <action  name="list"   class="com.user.controller.UserController"   method="list" >
+              <result  >
+               /user_list.jsp
+            </result>
+        </action>
+         <action  name="editBefore"   class="com.user.controller.UserController"   method="editBefore" >
+              <result  >
+               /user_edit.jsp
+            </result>
+        </action>
+        
+         <action  name="selectByUsername"   class="com.user.controller.UserController"   method="selectByUsername" >
+              <result >
+                   /user_list.jsp
+            </result>
+        </action>
+           <action  name="selectByUser"   class="com.user.controller.UserController"   method="selectByUser" >
+          </action>
+    </package>
+	
+	</struts>

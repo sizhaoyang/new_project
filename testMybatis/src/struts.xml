@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<!-- struts2文件头 -->
+<struts>
+    <constant name="struts.devMode" value="true" />
+    <!-- 设置为开发模式,报错的时候比较详细 -->
+    <constant name="struts.enable.DynamicMethodInvocation"  value="true"/>
+    <constant name="struts.i18n.encoding" value="utf-8" />
+        <include   file="com/user/controller/User.xml"></include>
+</struts>
+
